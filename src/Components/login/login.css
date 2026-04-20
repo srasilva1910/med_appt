@@ -1,15 +1,53 @@
 /* Styles for the main container */
-.container {
-    max-width: 900px; /* Set maximum width for the container */
-    margin: 0 auto; /* Center the container horizontally */
-    margin-top: 5rem; /* Set top margin as a percentage of the viewport height */
-    overflow: hidden; /* Hide any overflowing content */
+.auth-container {
+  max-width: 420px;
+  margin: 60px auto;
+  padding: 0 16px;
 }
 
+/*card*/
+.auth-card {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+}
 
-/* Styles for form groups */
+/*titles*/
+.auth-card h2 {
+  margin-bottom: 6px;
+}
+
+.auth-subtext {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.auth-subtext a {
+  color: #2190FF;
+  font-weight: 500;
+}
+
+/* Styles for form groups and inputs */
 .form-group {
-    margin-bottom: 20px; /* Bottom margin for spacing between form groups */
+  margin-bottom: 16px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #2190FF;
+  box-shadow: 0 0 0 3px rgba(33,144,255,0.15);
 }
 
 /* Styles for form group labels */
@@ -35,22 +73,41 @@
 }
 
 /* Styles for buttons */
-.btn {
-    padding: 10px 20px; /* Padding inside buttons */
-    font-size: 16px; /* Font size of buttons */
-    border: none; /* No border for buttons */
-    border-radius: 4px; /* Border radius for rounded corners on buttons */
-    cursor: pointer; /* Cursor style on hover for buttons */
+.auth-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2190FF, #6dd5ed);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.2s ease;
 }
 
-/* Styles for primary buttons */
-.btn-primary {
-    background-color: #6E74CD; /* Background color for primary buttons */
-    color: #fff; /* Text color for primary buttons */
+.auth-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
 }
 
-/* Styles for danger (red) buttons */
-.btn-danger {
-    background-color: #dc3545; /* Background color for danger buttons */
-    color: #fff; /* Text color for danger buttons */
+.auth-btn.secondary {
+  background: #f1f1f1;
+  color: #333;
+}
+
+.auth-error {
+  background: #ffe6e6;
+  color: #b30000;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  font-size: 14px;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 13px;
+  color: #777;
 }

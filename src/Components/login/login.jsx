@@ -37,8 +37,7 @@ const Login = () => {
         // 👇 AVISAR AL NAVBAR
         window.dispatchEvent(new Event("storage"));
 
-        console.log("LOGIN OK");
-
+      console.log(data);
         navigate('/');
       } else {
               console.log("LOGIN ERROR"); // 👈
@@ -55,40 +54,55 @@ const Login = () => {
     setError('');
   };
 
-  return (
-    <div className="container">
-      <div className="login-grid">
-        <div className="login-text">
-          <h2>Login</h2>
-        </div>
-        <div className="login-text">
-          Are you a new member? <span><Link to="/signup" style={{ color: '#2190FF' }}>Sign Up Here</Link></span>
-        </div>
-        <br />
-        <div className="login-form">
-          {error && <p style={{ color: 'red', marginBottom: '10px' }}>{error}</p>}
+    return (
+      <div className="auth-container">
+        <div className="auth-card">
+
+          <h2>Welcome Back 👋</h2>
+          <p className="auth-subtext">
+            New here? <Link to="/signup">Create an account</Link>
+          </p>
+
+          {error && <p className="auth-error">{error}</p>}
+
           <form onSubmit={handleSubmit}>
+
             <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input type="email" name="email" id="email" className="form-control" placeholder="Enter your email" value={formData.email} onChange={handleChange} required />
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                value={formData.email}
+                onChange={handleChange}
+              />
             </div>
+
             <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input type="password" name="password" id="password" className="form-control" placeholder="Enter your password" value={formData.password} onChange={handleChange} required />
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleChange}
+              />
             </div>
-            <div className="btn-group">
-              <button type="submit" className="btn btn-primary">Login</button>
-              <button type="button" className="btn btn-danger" onClick={handleReset}>Reset</button>
-            </div>
-            <br />
-            <div className="login-text">
-              Forgot Password?
-            </div>
+
+            <button type="submit" className="auth-btn">
+              Login
+            </button>
+
+            <button type="button" className="auth-btn secondary" onClick={handleReset}>
+              Reset
+            </button>
+
+            <p className="auth-footer">Forgot password?</p>
+
           </form>
         </div>
       </div>
-    </div>
-  );
+    );
 };
 
 export default Login;

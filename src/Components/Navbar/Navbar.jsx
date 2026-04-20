@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
@@ -7,8 +7,11 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef();
 
   const handleClick = () => setClick(!click);
+  
 
   const handleLogout = () => {
     sessionStorage.removeItem("auth-token");
@@ -73,6 +76,21 @@ useEffect(() => {
   };
 }, []);
 
+useEffect(() => {
+  const handleClickOutside = (e) => {
+    if (menuRef.current && !menuRef.current.contains(e.target)) {
+      setOpen(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
+
+
   return (
     <nav className="navbar">
   {/* LEFT */}
@@ -88,25 +106,46 @@ useEffect(() => {
     <li className="link"><Link to="/instant-consultation">Instant Consultation</Link></li>
     <li className="link"><Link to="/find-doctor">Appointments</Link></li>
     <li className="link"><Link to="/healthblog">Health Blog</Link></li>
-    <li className="link"><Link to="/reviews">Reviews</Link></li>
+    <li className="link"><Link to="/reviewspage">Reviews</Link></li>
   </ul>
 
   {/* RIGHT */}
-  <div className="nav__auth">
-    {isLoggedIn ? (
-      <>
-        <span className="welcome">
-          Welcome, <strong>{username}</strong> 👋
-        </span>
-        <button className="btn2" onClick={handleLogout}>Logout</button>
-      </>
-    ) : (
-      <>
-        <Link to="/signup"><button className="btn1">Sign Up</button></Link>
-        <Link to="/login"><button className="btn1">Login</button></Link>
-      </>
-    )}
+<div className="nav__auth">
+  {isLoggedIn ? (
+<div className="profile-menu" ref={menuRef}>
+    <span className="welcome" onClick={() => setOpen(!open)}>
+    👤 <strong>{username}</strong>
+  </span>
+
+  {open && (
+    <div className="dropdown">
+      <Link to="/profile">
+        <div>👤 Profile</div>
+      </Link>
+
+      <Link to="/reports">
+        <div>📄 My Reports</div>
+      </Link>
+
+      <div className="divider"></div>
+
+      <div onClick={handleLogout}>
+        🚪 Logout
+      </div>
+    </div>
+  )}    
   </div>
+  ) : (
+    <>
+      <Link to="/signup">
+        <button className="btn1">Sign Up</button>
+      </Link>
+      <Link to="/login">
+        <button className="btn1">Login</button>
+      </Link>
+    </>
+  )}
+</div>
 </nav>
   );
 };

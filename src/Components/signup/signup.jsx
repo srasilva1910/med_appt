@@ -66,46 +66,79 @@ const handleSubmit = async (e) => {
   };
 
   return (
-    <div className="container" style={{ marginTop: '5%' }}>
-      <div className="signup-grid">
-        <div className="signup-text">
-          <h1>Sign Up</h1>
-        </div>
-        <div className="signup-text1" style={{ textAlign: 'left' }}>
-          Already a member? <span><Link to="/login" style={{ color: '#2190FF' }}>Login</Link></span>
-        </div>
-        <div className="signup-form">
-          {error && <p style={{ color: 'red', marginBottom: '10px' }}>{error}</p>}
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="role">Role</label>
-              <select className="role" name="role" id="role" value={formData.role} onChange={handleChange}>
-                <option value="doctor">Doctor</option>
-                <option value="patient">Patient</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input type="text" name="name" id="name" required className="form-control" placeholder="Enter your name" value={formData.name} onChange={handleChange} />
-            </div>
-            <div className="form-group">
-              <label htmlFor="phone">Phone</label>
-              <input type="tel" name="phone" id="phone" required className="form-control" placeholder="Enter your phone number" value={formData.phone} onChange={handleChange} />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input type="email" name="email" id="email" required className="form-control" placeholder="Enter your email" value={formData.email} onChange={handleChange} />
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input type="password" name="password" id="password" required className="form-control" placeholder="Enter your password" value={formData.password} onChange={handleChange} />
-            </div>
-            <div className="btn-group">
-              <button type="submit" className="btn btn-primary">Submit</button>
-              <button type="button" className="btn btn-danger" onClick={handleReset}>Reset</button>
-            </div>
-          </form>
-        </div>
+    <div className="auth-container">
+      <div className="auth-card">
+
+        <h2>Create Account 🚀</h2>
+        <p className="auth-subtext">
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
+
+        {error && <p className="auth-error">{error}</p>}
+
+        <form onSubmit={handleSubmit}>
+
+          <div className="form-group">
+            <label>Role</label>
+            <select name="role" value={formData.role} onChange={handleChange}>
+              <option value="doctor">Doctor</option>
+              <option value="patient">Patient</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label>Name</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter your name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Phone</label>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Enter your phone"
+              value={formData.phone}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </div>
+
+          <button type="submit" className="auth-btn">
+            Create Account
+          </button>
+
+          <button type="button" className="auth-btn secondary" onClick={handleReset}>
+            Reset
+          </button>
+
+        </form>
       </div>
     </div>
   );

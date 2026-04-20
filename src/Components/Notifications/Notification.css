@@ -15,6 +15,30 @@
   animation: slideIn 0.4s ease;
 }
 
+.appointment-card__content {
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  font-size: 14px;
+  line-height: 1;
+}
+
 /* animación */
 @keyframes slideIn {
   from {

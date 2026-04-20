@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './FindDoctorSearchIC.css';
 import { useNavigate } from 'react-router-dom';
-import searchIcon from '/home/suellenalves54/vite-project/src/assets/searchIcon.png';
+import searchIcon from '../../../assets/searchIcon.png';
 
 const initSpeciality = [
   'Dentist',
@@ -52,14 +52,16 @@ const FindDoctorSearchIC = () => {
             {/* ✅ Vite fix */}
             <div className="findiconimg">
               <button
-                    className="search-btn"
-                    onClick={() => {
-                      if (searchDoctor.trim()) {
-                        navigate(`/find-doctor?speciality=${searchDoctor}`);
-                      }
-                    }}
-                  ><img className='findIcon' src={searchIcon} alt="" />
-                </button>
+  className="search-btn"
+  onMouseDown={(e) => e.preventDefault()} // 👈 clave
+  onClick={() => {
+    if (searchDoctor.trim()) {
+      navigate(`/find-doctor?speciality=${searchDoctor}`);
+    }
+  }}
+>
+  <img className='findIcon' src={searchIcon} alt="" />
+</button>
             </div>
 
             <div className="search-doctor-input-results" hidden={doctorResultHidden}>

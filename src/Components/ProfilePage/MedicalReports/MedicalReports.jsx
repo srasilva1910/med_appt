@@ -1,0 +1,72 @@
+import React, { useEffect, useState } from "react";
+import "./MedicalReports.css";
+
+const MedicalReports = () => {
+  const [reports, setReports] = useState([]);
+  console.log("TOKEN:", sessionStorage.getItem("auth-token"));
+
+useEffect(() => {
+  fetch("http://localhost:8181/api/reports", {
+    headers: {
+      "auth-token": sessionStorage.getItem("auth-token"),
+    },
+  })
+    .then((res) => {
+      console.log("STATUS:", res.status);
+      return res.json();
+    })
+    .then((data) => {
+      console.log("DATA:", data);
+      setReports(data);
+    });
+}, []);
+
+  const handleDownload = async (id) => {
+  try {
+    const res = await fetch(`http://localhost:8181/api/reports/${id}`, {
+      headers: {
+        "auth-token": sessionStorage.getItem("auth-token"),
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error("Error downloading file");
+    }
+
+    const blob = await res.blob();
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "report.pdf"; // puedes hacerlo dinámico si quieres
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    window.URL.revokeObjectURL(url);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+  return (
+      <div className="reports-card">
+        <h3>📄 Medical Reports</h3>
+
+        {reports.length === 0 ? (
+          <p className="no-reports">No reports available</p>
+        ) : (
+          reports.map((r) => (
+            <div key={r._id} className="report-item">
+                <span>{r.filename || "Report"}</span>
+              <button onClick={() => handleDownload(r._id)}>
+                ⬇️ Download
+              </button>
+            </div>
+          ))
+        )}
+      </div>
+  );
+};
+
+export default MedicalReports;

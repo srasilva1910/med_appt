@@ -220,3 +220,56 @@
   margin-right: 10px;
   font-weight: 500;
 }
+
+/* wrapper */
+.profile-menu {
+  position: relative;
+  cursor: pointer;
+}
+
+/* dropdown */
+.dropdown {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  padding: 8px;
+  min-width: 180px;
+  z-index: 100;
+}
+
+/* items */
+.dropdown div {
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dropdown div:hover {
+  background: #f5f5f5;
+}
+
+/* quitar estilo link */
+.dropdown a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* divider */
+.divider {
+  height: 1px;
+  background: #eee;
+  margin: 6px 0;
+}
+
+.avatar {
+  background: linear-gradient(135deg, #2190FF, #6dd5ed);
+  color: white;
+  border-radius: 50%;
+  padding: 6px 10px;
+  margin-right: 8px;
+  font-size: 12px;
+}

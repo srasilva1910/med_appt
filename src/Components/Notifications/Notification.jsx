@@ -77,19 +77,11 @@ const lastAppointment = Array.isArray(appointmentData)
               <p><strong>📅 Date:</strong> {lastAppointment.date}</p>
               <p><strong>⏰ Time:</strong> {lastAppointment.slot}</p>
                <button
-                  onClick={() => setShowNotification(false)}
-                  style={{
-                    position: "absolute",
-                    top: "8px",
-                    right: "10px",
-                    border: "none",
-                    background: "transparent",
-                    cursor: "pointer",
-                    fontSize: "16px"
-                  }}
-                >
-                  ✖
-                </button>
+                    onClick={() => setShowNotification(false)}
+                    className="close-btn"
+                  >
+                    ✖
+                  </button>
                   <button onClick={() => handleCancel(lastAppointment.id)}>
                     Cancel
                   </button>
