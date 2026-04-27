@@ -1,4 +1,5 @@
 import React from "react"; // Importing the necessary modules from React library
+import { Link } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Login from "../login/login";
 import Signup from "../signup/signup";
@@ -29,9 +30,9 @@ const Landing_Page = () => {
             <h4>
               Your health is your most valuable asset. StayHealthy helps you take care of it—one step at a time.
             </h4>
-            <a href="/find-doctor"> {/* Creating a hyperlink to jump to the 'services' section */}
+            <Link to="/find-doctor"> {/* Creating a hyperlink to jump to the 'services' section */}
               <button className="button">Get Started</button>
-            </a>
+            </Link>
         </div>
       </div>
     </section>
