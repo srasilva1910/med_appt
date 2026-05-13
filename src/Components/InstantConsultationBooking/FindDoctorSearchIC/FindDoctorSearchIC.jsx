@@ -24,8 +24,6 @@ const FindDoctorSearchIC = () => {
   const handleDoctorSelect = (speciality) => {
     setSearchDoctor(speciality);
     setDoctorResultHidden(true);
-
-    // ✅ SOLO navegar (SIN reload)
     navigate(`/instant-consultation?speciality=${speciality}`);
   };
 
@@ -36,15 +34,21 @@ const FindDoctorSearchIC = () => {
         <div className="home-search-container">
   <div className="search-wrapper">
 
-    <input
-      type="text"
-      className="search-input"
-      placeholder="Search doctors, clinics, hospitals..."
-      onFocus={() => setDoctorResultHidden(false)}
-      onBlur={() => setDoctorResultHidden(true)}
-      value={searchDoctor}
-      onChange={(e) => setSearchDoctor(e.target.value)}
-    />
+<input
+  type="text"
+  className="search-input"
+  placeholder="Search doctors, clinics, hospitals..."
+  onFocus={() => setDoctorResultHidden(false)}
+  onBlur={() => setDoctorResultHidden(true)}
+  value={searchDoctor}
+  onChange={(e) => setSearchDoctor(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === 'Enter' && searchDoctor.trim()) {
+      navigate(`/instant-consultation?speciality=${encodeURIComponent(searchDoctor)}`);
+      setDoctorResultHidden(true);
+    }
+  }}
+/>
 
     <img
       src={searchIcon}
@@ -53,7 +57,7 @@ const FindDoctorSearchIC = () => {
       onMouseDown={(e) => e.preventDefault()}
       onClick={() => {
         if (searchDoctor.trim()) {
-          navigate(`/find-doctor?speciality=${searchDoctor}`);
+          navigate(`/instant-consultation?speciality=${searchDoctor}`);
         }
       }}
     />

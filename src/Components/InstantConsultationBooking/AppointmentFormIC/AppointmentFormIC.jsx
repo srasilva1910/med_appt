@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './AppointmentFormIC.css'
 
 const AppointmentFormIC = ({ doctorName, doctorSpeciality, onSubmit }) => {
     const [name, setName] = useState('');
@@ -38,7 +39,8 @@ const AppointmentFormIC = ({ doctorName, doctorSpeciality, onSubmit }) => {
             required
           />
         </div>
-        <button type="submit">Book Now</button>
+        <button type="submit" className="book-appointment-btn"
+>Book Now</button>
       </form>
     );
   };

@@ -37,14 +37,25 @@ const DoctorCardIC = ({ name, speciality, experience, ratings }) => {
           />
         </div>
 
-        <div className="doctor-card-details">
-          
-          <div>{name}</div>
-          <div>{speciality}</div>
-          <div>{experience} years experience</div>
-          <div>Ratings: {ratings}</div>
-        </div>
-      </div>
+                        <div className="doctor-card-details">
+
+                          <h3 className="doctor-name">
+                            {name}
+                          </h3>
+
+                          <p className="doctor-speciality">
+                            {speciality}
+                          </p>
+
+                          <p className="doctor-experience">
+                            {experience} years experience
+                          </p>
+
+                          <p className="doctor-rating">
+                            ⭐ {ratings}
+                          </p>
+
+                        </div>      </div>
 
       <div className="doctor-card-options-container">
         <Popup
@@ -63,8 +74,7 @@ const DoctorCardIC = ({ name, speciality, experience, ratings }) => {
           open={showModal}
           onClose={() => setShowModal(false)}
         >
-        <div style={{ padding: '20px', textAlign: 'center' }}>
-  
+                  <div className="popup-doctor-content">  
                     {/* ✅ IMAGEN DEL DOCTOR */}
                     <img
                       src={`https://ui-avatars.com/api/?name=${name}&background=2190FF&color=fff`}
@@ -78,11 +88,25 @@ const DoctorCardIC = ({ name, speciality, experience, ratings }) => {
                     />
 
                     {/* ✅ INFO */}
-                    <h3>{name}</h3>
-                    <p>{speciality}</p>
-                    <p>{experience} years experience</p>
-                    <p>Ratings: {ratings}</p>
-            
+                        <div className="doctor-card-details">
+
+                          <h3 className="doctor-name">
+                            {name}
+                          </h3>
+
+                          <p className="doctor-speciality">
+                            {speciality}
+                          </p>
+
+                          <p className="doctor-experience">
+                            {experience} years experience
+                          </p>
+
+                          <p className="doctor-rating">
+                            ⭐ {ratings}
+                          </p>
+
+                        </div>            
             {appointments.length > 0 ? (
               appointments.map((a) => (
                 <div key={a.id}>

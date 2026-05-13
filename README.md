@@ -1,36 +1,69 @@
-# Frontend Capstone Project - App Name: 🏥 StayHealthy 
+# 🏥 StayHealthy
 
-Developed as a frontend capstone project for the course Frontend Development, from IBM in Coursera. A full-stack web application built with **React + Vite** for the frontend, **Node.js + Express** for the backend, and **MongoDB Atlas** as the database. 
+Modern full-stack medical appointment management platform built with React, Node.js, Express, and MongoDB Atlas.
 
-🔗 Live Demo: https://stayhealthyf.onrender.com/
+StayHealthy allows users to browse healthcare services, manage appointments, and interact with a responsive healthcare-focused interface designed with modern frontend development practices.
 
 ---
 
-## 🚀 Tech Stack
+## 🚀 Live Demo
+
+Frontend: https://stayhealthyf.onrender.com/
+
+---
+
+## ✨ Features
+
+- Responsive modern UI
+- Appointment management system
+- REST API integration
+- MongoDB Atlas cloud database
+- Client-server architecture
+- Dynamic routing with React Router
+- API communication using Axios
+- Environment-based configuration
+- Scalable frontend/backend separation
+
+---
+
+## 🛠 Tech Stack
 
 ### Frontend
-
-* React
-* Vite
-* Axios
-* React Router
+- React
+- Vite
+- React Router
+- Axios
+- CSS
 
 ### Backend
+- Node.js
+- Express.js
 
-* Node.js
-* Express
-* MongoDB Atlas
-* Mongoose
+### Database
+- MongoDB Atlas
+- Mongoose
+
+---
+
+## 🏗 Architecture
+
+StayHealthy follows a full-stack client-server architecture:
+
+- The frontend is built with React + Vite
+- The backend API is powered by Express.js
+- MongoDB Atlas handles cloud data persistence
+- Mongoose is used as the ODM layer
+- Axios manages frontend-backend communication
 
 ---
 
 ## 📁 Project Structure
 
-```
-vite-project/
+```bash
+stayhealthy/
 │
-├── client/        # Frontend (React + Vite)
-├── server/        # Backend (Node + Express)
+├── client/        # React + Vite frontend
+├── server/        # Express backend API
 └── README.md
 ```
 
@@ -38,48 +71,50 @@ vite-project/
 
 ## ⚙️ Prerequisites
 
-Make sure you have installed:
+Before running the project locally, make sure you have:
 
-* Node.js (v18 or higher recommended)
-* npm or yarn
-* A MongoDB Atlas account
+- Node.js (v18+ recommended)
+- npm or yarn
+- MongoDB Atlas account
 
 ---
 
-## 🔧 Setup Instructions
+## 🔧 Installation & Setup
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/srasilva1910/vite-project.git
-cd vite-project
+git clone https://github.com/srasilva1910/med_appt.git
+cd med_appt
 ```
 
 ---
 
 ### 2. Backend Setup
 
+Navigate to the server folder:
+
 ```bash
 cd server
 npm install
 ```
 
-#### Create a `.env` file inside `/server`
+Create a `.env` file inside `/server`:
 
 ```env
 PORT=5000
-MONGO_URI=your_mongodb_atlas_connection_string
+MONGO_URI=your_mongodb_connection_string
 ```
 
-#### Run the backend server
+Run the backend server:
 
 ```bash
-npm run dev
+npm start
 ```
 
-Backend will run on:
+Backend will run at:
 
-```
+```bash
 http://localhost:5000
 ```
 
@@ -87,94 +122,75 @@ http://localhost:5000
 
 ### 3. Frontend Setup
 
+Navigate to the client folder:
+
 ```bash
 cd ../client
 npm install
 ```
 
-#### Create a `.env` file inside `/client`
+Create a `.env` file inside `/client`:
 
 ```env
 VITE_API_URL=http://localhost:5000
 ```
 
-#### Run the frontend
+Run the frontend:
 
 ```bash
 npm run dev
 ```
 
-Frontend will run on:
+Frontend will run at:
 
-```
+```bash
 http://localhost:5173
 ```
 
 ---
 
-## 🌐 Environment Variables
+## 📡 API Overview
 
-### Backend (`/server/.env`)
-
-* `PORT` – Server port
-* `MONGO_URI` – MongoDB Atlas connection string
-
-### Frontend (`/client/.env`)
-
-* `VITE_API_URL` – Backend API URL
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | /appointments | Fetch appointments |
+| POST | /appointments | Create appointment |
+| GET | /doctors | Fetch doctors |
+| POST | /users | Register user |
 
 ---
 
-## 📦 Available Scripts
+## 🌱 Future Improvements
 
-### Backend
-
-```bash
-npm run dev     # Run with nodemon
-npm start       # Run in production
-```
-
-### Frontend
-
-```bash
-npm run dev     # Development mode
-npm run build   # Production build
-npm run preview # Preview build
-```
+- Role-based access
+- Calendar integration
+- Notifications system
+- Docker support
+- Automated testing
+- CI/CD pipeline
 
 ---
 
-## 🚀 Deployment
+## 📚 Learning Goals
 
-The app is deployed on **Render**.
+This project was developed as part of the IBM Frontend Development Professional Certificate on Coursera, with the goal of strengthening:
 
-For deployment:
-
-* Configure environment variables properly
-* Update the frontend API URL to point to the production backend
-
----
-
-## 🧪 Future Improvements
-
-* Appointments agenda
-* Add testing (Jest / React Testing Library)
-* Improve UI/UX
-* Docker support
+- Full-stack development skills
+- REST API integration
+- React application architecture
+- Backend development with Express
+- Database modeling with MongoDB
 
 ---
 
 ## 👨‍💻 Author
 
-S. R. A. da Silva
+Developed by Suellen Silva.
 
----
+GitHub:
+https://github.com/srasilva1910
 
-## 📄 License
+## 📸 Screenshots
 
-MIT
-
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Homepage
+![Homepage](./screenshots/home.png)

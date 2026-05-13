@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import './DoctorCardBA.css';
@@ -6,50 +6,97 @@ import AppointmentFormBA from '../AppointmentFormBA/AppointmentFormBA';
 import { v4 as uuidv4 } from 'uuid';
 
 const DoctorCardBA = ({ name, speciality, experience, ratings }) => {
-  const [showModal, setShowModal] = useState();
-  const [appointments, setAppointments] = useState(() => {
-  return JSON.parse(localStorage.getItem('appointmentData')) || [];
-});
+
+  const [showModal, setShowModal] = useState(false);
+
+  const [appointments, setAppointments] = useState([]);
+
+  const [viewMode, setViewMode] = useState("form");
+
+  // ✅ sincronizar localStorage
+  useEffect(() => {
+
+    const syncAppointments = () => {
+      const storedAppointments =
+        JSON.parse(localStorage.getItem('appointmentData')) || [];
+
+      setAppointments(storedAppointments);
+    };
+
+    // 👇 cargar al iniciar
+    syncAppointments();
+
+    // 👇 escuchar cambios
+    window.addEventListener(
+      "appointmentCreated",
+      syncAppointments
+    );
+
+    return () => {
+      window.removeEventListener(
+        "appointmentCreated",
+        syncAppointments
+      );
+    };
+
+  }, []);
+
+  // ✅ citas SOLO de este doctor
+  const doctorAppointments = appointments.filter(
+    (a) => a.doctorName === name
+  );
 
   const handleCancel = (appointmentId) => {
-  const updated = appointments.filter(a => a.id !== appointmentId);
 
-  setAppointments(updated);
+    const updated = appointments.filter(
+      a => a.id !== appointmentId
+    );
 
-  localStorage.setItem('appointmentData', JSON.stringify(updated));
-    window.dispatchEvent(new Event("appointmentCreated")); // 👈 importante
+    setAppointments(updated);
 
-};
+    localStorage.setItem(
+      'appointmentData',
+      JSON.stringify(updated)
+    );
 
-  const handleFormSubmit = (appointmentData) => {
-  const newAppointment = {
-    id: uuidv4(),
-    doctorName: name,
-    doctorSpeciality: speciality,
-    ...appointmentData,
+    window.dispatchEvent(
+      new Event("appointmentCreated")
+    );
   };
 
-  const updated = [...appointments, newAppointment];
+  const handleFormSubmit = (appointmentData) => {
 
-  setAppointments(updated);
-  localStorage.setItem('appointmentData', JSON.stringify(updated));
+    const newAppointment = {
+      id: uuidv4(),
+      doctorName: name,
+      doctorSpeciality: speciality,
+      ...appointmentData,
+    };
 
-  localStorage.setItem('doctorData', JSON.stringify({
-    name,
-    speciality
-  }));
+    const updated = [
+      ...appointments,
+      newAppointment
+    ];
 
-  window.dispatchEvent(new Event("appointmentCreated"));
+    setAppointments(updated);
 
-  //setShowModal(false);
-};
+    localStorage.setItem(
+      'appointmentData',
+      JSON.stringify(updated)
+    );
 
-const [viewMode, setViewMode] = useState("form"); 
-// "form" | "details"
+    localStorage.setItem(
+      'doctorData',
+      JSON.stringify({
+        name,
+        speciality
+      })
+    );
 
-const doctorAppointments = appointments.filter(
-  a => a.doctorName === name
-);
+    window.dispatchEvent(
+      new Event("appointmentCreated")
+    );
+  };
 
   return (
     <div className="doctor-card-container">
@@ -64,35 +111,55 @@ const doctorAppointments = appointments.filter(
         </div>
 
         <div className="doctor-card-details">
-          
-          <div>{name}</div>
-          <div>{speciality}</div>
-          <div>{experience} years experience</div>
-          <div>Ratings: {ratings}</div>
-        </div>
+
+  <h3 className="doctor-name">
+    {name}
+  </h3>
+
+  <p className="doctor-speciality">
+    {speciality}
+  </p>
+
+  <p className="doctor-experience">
+    {experience} years experience
+  </p>
+
+  <p className="doctor-rating">
+    ⭐ {ratings}
+  </p>
+
+</div>
       </div>
 
       <div className="doctor-card-options-container">
-  <button
-  onClick={() => setShowModal(true)}
+<button
+  onClick={() => {
+    setViewMode(
+      doctorAppointments.length > 0 ? "details" : "form"
+    );
+
+    setShowModal(true);
+  }}
   className="book-appointment-btn"
 >
   <div>
-    {appointments.length > 0 ? 'View Appointment' : 'Book Appointment'}
+    {doctorAppointments.length > 0
+      ? 'View Appointment'
+      : 'Book Appointment'}
   </div>
+
   <div>No Booking Fee</div>
 </button>
 
 
 <Popup
-modal 
-open={showModal}
-  onClick={() => {
-  setViewMode(appointments.length > 0 ? "details" : "form");
-  setShowModal(true);
-}}
+  modal
+  open={showModal}
+  onClose={() => setShowModal(false)}
 >
+
     <div style={{ padding: '20px', textAlign: 'center' }}>
+
 
       <img
         src={`https://ui-avatars.com/api/?name=${name}&background=2190FF&color=fff`}
@@ -105,19 +172,34 @@ open={showModal}
         }}
       />
 
-      <h3>{name}</h3>
-      <p>{speciality}</p>
-      <p>{experience} years experience</p>
-      <p>Ratings: {ratings}</p>
+<div className="doctor-card-details">
 
+  <h3 className="doctor-name">
+    {name}
+  </h3>
+
+  <p className="doctor-speciality">
+    {speciality}
+  </p>
+
+  <p className="doctor-experience">
+    {experience} years experience
+  </p>
+
+  <p className="doctor-rating">
+    ⭐ {ratings}
+  </p>
+
+</div>
 {viewMode === "details" ? (
-appointments.length > 0 && (
-  <div>
+doctorAppointments.length > 0 && (
+    <div>
     <p>Booking confirmed</p>
 
     <button onClick={() => {
-      handleCancel(appointments[appointments.length - 1].id);
-      setViewMode("form");
+handleCancel(
+  doctorAppointments[doctorAppointments.length - 1].id
+);      setViewMode("form");
     }}>
       Cancel
     </button>
@@ -134,6 +216,18 @@ appointments.length > 0 && (
     }}
   />
 )}
+
+    <button
+      onClick={() => setShowModal(false)}
+      style={{
+        marginTop: "15px",
+        padding: "10px 20px",
+        cursor: "pointer"
+      }}
+    >
+      Close
+    </button>
+
     </div>
 </Popup>
       </div>

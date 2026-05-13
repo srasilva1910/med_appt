@@ -1,0 +1,121 @@
+.appointment-form {
+  width: 100%;
+  
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.5rem;
+
+  margin-top: 20rem;
+}
+
+/* GROUP */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  gap: .6rem;
+}
+
+/* LABELS */
+
+.form-group label {
+  font-size: .95rem;
+  font-weight: 600;
+
+  color: #0f172a;
+}
+
+/* INPUTS */
+
+.form-group input {
+  width: 100%;
+
+  max-width: 100%;
+
+  min-width: 0;
+
+  padding: 1rem 1rem;
+
+  border-radius: 14px;
+
+  border: 1px solid #dbeafe;
+
+  background: rgba(255,255,255,.8);
+
+  font-size: 1rem;
+
+  transition: .3s ease;
+
+  outline: none;
+}
+
+/* INPUT FOCUS */
+
+.form-group input:focus {
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 4px rgba(37,99,235,.1);
+}
+
+/* BUTTON */
+
+.book-appointment-btn {
+  width: 100%;
+
+  border: none;
+
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #7c3aed
+  );
+
+  color: white;
+
+  padding: 1rem;
+
+  border-radius: 14px;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: .3s ease;
+
+  margin-top: .5rem;
+
+  box-shadow:
+    0 10px 30px rgba(37,99,235,.2);
+}
+
+.book-appointment-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .appointment-form {
+    gap: 1.2rem;
+  }
+
+  .form-group input {
+    padding: .9rem 1rem;
+
+    font-size: .95rem;
+  }
+
+  .book-appointment-btn {
+    padding: .95rem;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
