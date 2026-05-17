@@ -138,6 +138,37 @@ useEffect(() => {
         Reviews
         </Link>
       </li>
+      {/* MOBILE AUTH */}
+<div className="mobile-buttons">
+  {!isLoggedIn ? (
+    <>
+      <Link to="/signup" onClick={() => setClick(false)}>
+        <button className="btn1 mobile-btn">Sign Up</button>
+      </Link>
+
+      <Link to="/login" onClick={() => setClick(false)}>
+        <button className="btn1 mobile-btn">Login</button>
+      </Link>
+    </>
+  ) : (
+    <div className="mobile-user">
+      <Link to="/profile" onClick={() => setClick(false)}>
+        Profile
+      </Link>
+
+      <Link to="/reports" onClick={() => setClick(false)}>
+        My Reports
+      </Link>
+
+      <button
+        className="btn1 mobile-btn"
+        onClick={handleLogout}
+      >
+        Logout
+      </button>
+    </div>
+  )}
+</div>
   </ul>
 
 
