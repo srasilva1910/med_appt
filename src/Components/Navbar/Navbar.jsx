@@ -105,6 +105,12 @@ useEffect(() => {
     </Link>
   </div>
 
+{/* MOBILE MENU ICON */}
+<div className="nav__icon" onClick={handleClick}>
+  <i className={click ? "fa fa-times" : "fa fa-bars"}></i>
+</div>
+
+
   {/* CENTER */}
     <ul className={click ? "nav__links active" : "nav__links"}>
       <li className="link">
@@ -134,14 +140,10 @@ useEffect(() => {
       </li>
   </ul>
 
-{/* MOBILE MENU ICON */}
-<div className="nav__icon" onClick={handleClick}>
-  <i className={click ? "fa fa-times" : "fa fa-bars"}></i>
-</div>
 
   {/* RIGHT */}
-<div className="nav__auth">
-  {isLoggedIn ? (
+<div className={click ? "nav__auth mobile-auth" : "nav__auth"}>
+    {isLoggedIn ? (
 <div className="profile-menu" ref={menuRef}>
     <span className="welcome" onClick={() => setOpen(!open)}>
     👤 <strong>{username}</strong>
