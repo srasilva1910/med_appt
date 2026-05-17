@@ -106,13 +106,38 @@ useEffect(() => {
   </div>
 
   {/* CENTER */}
-  <ul className="nav__links">
-    <li className="link"><Link to="/">Home</Link></li>
-    <li className="link"><Link to="/instant-consultation">Instant Consultation</Link></li>
-    <li className="link"><Link to="/find-doctor">Appointments</Link></li>
-    <li className="link"><Link to="/healthblog">Health Blog</Link></li>
-    <li className="link"><Link to="/reviewspage">Reviews</Link></li>
+    <ul className={click ? "nav__links active" : "nav__links"}>
+      <li className="link">
+        <Link to="/" onClick={() => setClick(false)}>
+          Home
+        </Link>
+      </li>    
+      <li className="link">
+        <Link to="/instant-consultation" onClick={() => setClick(false)}>
+        Instant Consultation
+        </Link>
+      </li>
+      <li className="link">
+        <Link to="/find-doctor" onClick={() => setClick(false)}>
+        Appointments
+        </Link>
+      </li>
+      <li className="link">
+        <Link to="/healthblog" onClick={() => setClick(false)}>
+        Health Blog
+        </Link>
+      </li>
+      <li className="link">
+        <Link to="/reviewspage" onClick={() => setClick(false)}>
+        Reviews
+        </Link>
+      </li>
   </ul>
+
+{/* MOBILE MENU ICON */}
+<div className="nav__icon" onClick={handleClick}>
+  <i className={click ? "fa fa-times" : "fa fa-bars"}></i>
+</div>
 
   {/* RIGHT */}
 <div className="nav__auth">
